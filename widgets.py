@@ -1,9 +1,16 @@
+# File name: widgets.py
 from kivy.app import App
-from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.widget import Widget
 
-class FloatLayoutApp(App):
-    def build(self):
-        return FloatLayout()
+
+class MyWidget(Widget):
+    pass
+
+
+class WidgetApp(App):
+    def budil(self):
+        return MyWidget()
+
 
 if __name__ == "__main__":
-    FloatLayoutApp().run()
+    WidgetApp().run()
