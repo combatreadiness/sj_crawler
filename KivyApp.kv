@@ -23,19 +23,29 @@
         text: 'Hi! SJ\'s the Crawler'
 
     BackgroundLabel:
-        size_hint_y: 0.10
         background_color: 1, 1, 1, 1
-        color: 0, 0, 0, 1
-        text: 'Please Type Keywords'
-    BoxLayout:
         size_hint_y: 0.10
-        orientation: "horizontal"
-        TextInput:
-            size_hint_x: 0.8
-            text: "Type here and separate with comma"
-        Button:
-            size_hint_x: 0.2
-            text:"CRAWL!"
-    BackgroundLabel:
-        text: '~Keywords'
+        color: 0, 0, 0, 1
+        text: 'Please Type Keywords Below'
+
+
+    AnchorLayout:
+        size_hint_y: 0.10
+        canvas:
+            Color:
+                rgba: 0.5, 0.5, 0.5, 0.5
+            Rectangle: #woohoo!!!
+                size: self.size
+                pos: self.pos
+        BoxLayout:
+            size_hint: .95, .8
+            orientation: "horizontal"
+            TextInput:
+                text: "Type here and separate with comma"
+            Button:
+                size_hint_x: 0.2
+                text:"CRAWL"
+
+    AnchorLayout:
+        size_hint_y: 0.7
 
