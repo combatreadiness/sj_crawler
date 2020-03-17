@@ -1,51 +1,85 @@
-#:kivy 1.11.1
-<BackgroundColor@Widget>
-    background_color: 1, 1, 1, 1
-    canvas.before:
-        Color:
-            rgba: root.background_color
-        Rectangle:
-            size: self.size
-            pos: self.pos
-# Now you can simply Mix the `BackgroundColor` class with almost
-# any other widget... to give it a background.
-<BackgroundLabel@Label+BackgroundColor>
-    background_color: 0, 0, 0, 0
-    # Default the background color for this label
-    # to r 0, g 0, b 0, a 0
-# Use the BackgroundLabel any where in your kv code like below
-
-<inputLayout>:
-    rows:4
-    BackgroundLabel:
-        size_hint_y: 0.10
-        background_color: 1, 0.3, 0, 1
-        text: 'Hi! SJ\'s the Crawler'
-
-    BackgroundLabel:
-        background_color: 1, 1, 1, 1
-        size_hint_y: 0.10
-        color: 0, 0, 0, 1
-        text: 'Please Type Keywords Below'
+BoxLayout:
+    orientation: "vertical"
+    MDToolbar:
+        id: toolbar
+        title: "SJ's News Crawler"
+        elevation: 10
+    WindowManager:
+        id:WM
+        SearchPage:
+            id:SearchPage
+        ResultPage:
+            id:ResultPage
 
 
-    AnchorLayout:
-        size_hint_y: 0.10
-        canvas:
-            Color:
-                rgba: 0.5, 0.5, 0.5, 0.5
-            Rectangle: #woohoo!!!
-                size: self.size
-                pos: self.pos
+
+<SearchPage>:
+    name:"search"
+    BoxLayout:
+        orientation: "vertical"
+        GridLayout:
+            padding: dp(20)
+            spacing: dp(10)
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDLabel:
+                text: "Select Press"
+            MDSeparator:
+
+            StackLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(5)
+                id: pressList
+            Widget:
+                size_hint_y: None
+                height: dp(1)
+
         BoxLayout:
-            size_hint: .95, .8
-            orientation: "horizontal"
-            TextInput:
-                text: "Type here and separate with comma"
-            Button:
-                size_hint_x: 0.2
-                text:"CRAWL"
+            id: box
+            padding: dp(20)
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(10)
+            orientation: "vertical"
+            pos_hint: {"center_x": .5}
+            MDLabel:
+                text: "Keywords"
+            MDSeparator:
+            MDTextField:
+                id: textField
+                hint_text: "Use comma for multiple keywords"
+                helper_text: "Enter at least one keywords"
+                helper_text_mode: "persistent"
+            MDFillRoundFlatButton:
+                text: "CRAWL"
+                pos_hint: {"center_x": .5}
+                on_release:
+                    app.findNews()
+                    app.root.ids.WM.current = "result"
+                    root.manager.transition.direction = "up"
 
-    AnchorLayout:
-        size_hint_y: 0.7
 
+        ScrollView:
+            MDList:
+
+<ResultPage>:
+    name:"result"
+    MDSpinner:
+        size_hint: None, None
+        size: dp(46), dp(46)
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        active: True
+    BoxLayout:
+        orientation: "vertical"
+
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.ids.WM.current = "search"
+                root.manager.transition.direction = "down"
+        ScrollView:
+            MDList:

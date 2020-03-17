@@ -1,29 +1,29 @@
 {
-  "cnn_us" : {
+  "CNN US" : {
     "url":"https://www.cnn.com/us",
     "link_url":"https://www.cnn.com",
     "title_tag": "h3",
     "title_class": "cd__headline"
   },
-    "cnn_world" : {
+    "CNN World" : {
     "url":"https://www.cnn.com/world",
     "link_url":"https://www.cnn.com",
     "title_tag": "h3",
     "title_class": "cd__headline"
   },
-    "google" : {
+    "Google" : {
     "url":"https://news.google.com/",
     "link_url":"https://news.google.com",
     "title_tag": "h3",
     "title_class": "ipQwMb ekueJc RD0gLb"
   },
-     "fox" : {
+     "FOX" : {
     "url":"https://www.foxnews.com/",
     "link_url":"",
     "title_tag": "h2",
     "title_class": "title title-color-default"
   },
-     "nbc" : {
+     "NBC" : {
     "url":"https://www.nbcnews.com/latest-stories/",
     "link_url":"",
     "title_tag": "h2",
