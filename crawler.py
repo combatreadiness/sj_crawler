@@ -11,7 +11,7 @@ class Crawler:
     def getListOfPress(self):
         return list(self.json_data.keys())
 
-   def findMyNews(self, press_name: "cnn_us", keywords: []) -> {}:
+    async def findMyNews(self, press_name: "cnn_us", keywords: []) -> {}:
         try:
             website = self.json_data[press_name]["url"]
             link_url = self.json_data[press_name]["link_url"]

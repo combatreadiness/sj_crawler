@@ -51,10 +51,11 @@ class KivyApp(MDApp):
         pass
 
     def findNews(self):
-        print("test")
         loop = asyncio.get_event_loop()  # 이벤트 루프를 얻음
         loop.run_until_complete(self.getNews())  # main이 끝날 때까지 기다림
+        print("hi")
         loop.close()
+
 
     async def getNews(self):
         final_list = {}

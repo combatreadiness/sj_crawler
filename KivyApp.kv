@@ -57,9 +57,10 @@ BoxLayout:
                 text: "CRAWL"
                 pos_hint: {"center_x": .5}
                 on_release:
-                    app.findNews()
                     app.root.ids.WM.current = "result"
                     root.manager.transition.direction = "up"
+                    app.findNews()
+
 
 
         ScrollView:
