@@ -57,30 +57,32 @@ BoxLayout:
                 text: "CRAWL"
                 pos_hint: {"center_x": .5}
                 on_release:
-                    app.root.ids.WM.current = "result"
                     root.manager.transition.direction = "up"
-                    app.findNews()
-
-
+                    app.runResultPage()
 
         ScrollView:
             MDList:
 
 <ResultPage>:
     name:"result"
-    MDSpinner:
-        size_hint: None, None
-        size: dp(46), dp(46)
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        active: True
     BoxLayout:
         orientation: "vertical"
-
-
-        Button:
-            text: "Go Back"
-            on_release:
-                app.root.ids.WM.current = "search"
-                root.manager.transition.direction = "down"
+        GridLayout:
+            padding: dp(20)
+            spacing: dp(10)
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            StackLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(5)
+                MDFillRoundFlatButton:
+                    text: "Go Back"
+                    on_release:
+                        app.root.ids.WM.current = "search"
+                        root.manager.transition.direction = "down"
+            MDSeparator:
         ScrollView:
             MDList:
+                id: NewsList

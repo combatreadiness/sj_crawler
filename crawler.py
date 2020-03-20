@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import json
-import asyncio
+
 
 class Crawler:
     def __init__(self):
@@ -11,7 +11,7 @@ class Crawler:
     def getListOfPress(self):
         return list(self.json_data.keys())
 
-    async def findMyNews(self, press_name: "cnn_us", keywords: []) -> {}:
+    def findMyNews(self, press_name: "cnn_us", keywords: []) -> {}:
         try:
             website = self.json_data[press_name]["url"]
             link_url = self.json_data[press_name]["link_url"]
@@ -36,8 +36,9 @@ class Crawler:
 
         return my_news_list
 
+
 if __name__ == '__main__':
-    c = crawler()
+    c = Crawler()
     final_results = (c.findMyNews('fox', ["Trump"]))
     c.getListOfPress()
     for k, v in final_results.items():
