@@ -80,9 +80,9 @@ BoxLayout:
                 MDFillRoundFlatButton:
                     text: "Go Back"
                     on_release:
+                        app.clearThreads()
                         app.root.ids.WM.current = "search"
                         root.manager.transition.direction = "down"
-                        app.clearThreads()
                 MDFillRoundFlatButton:
                     text: "Refresh"
                     on_release:
@@ -93,3 +93,9 @@ BoxLayout:
         ScrollView:
             MDList:
                 id: NewsList
+
+<MyListItem>:
+    on_release:
+        root.move_to_link()
+
+

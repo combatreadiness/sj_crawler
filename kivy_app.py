@@ -12,8 +12,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.metrics import dp
 
 from kivymd.app import MDApp
+from kivymd.uix.button import MDIconButton
 from kivymd.uix.chip import MDChip
-from kivymd.uix.list import TwoLineAvatarIconListItem
+from kivymd.uix.list import TwoLineListItem, IRightBodyTouch
 from kivymd.uix.snackbar import Snackbar
 
 from queue import Queue
@@ -28,6 +29,16 @@ class ResultPage(Screen):
 
 
 class WindowManager(ScreenManager):
+    pass
+
+
+
+class MyListItem(TwoLineListItem):
+    def setLink(self, link):
+        self.link= link
+
+    def move_to_link(self):
+        webbrowser.open_new_tab(self.link)
     pass
 
 
@@ -71,13 +82,15 @@ class KivyApp(MDApp):
 
     def runResultPage(self):
         self.keywords = (self.root.ids.SearchPage.ids.textField.text.replace(" ", "").split(','))
+        self.uploaded_news_list = {}
+
         if len(self.keywords[0]) == 0:
             self.snackbar_show("Please Type Keywords")
             return
         if len(self.search_list) == 0:
             self.snackbar_show("Please Select at least one press")
             return
-        print(self.keywords, " and ",self.search_list)
+        print(self.keywords, " and ", self.search_list)
         self.root.ids.WM.current = "result"
         self.showNewsListThread()
         self.getNewsListThread()
@@ -90,8 +103,6 @@ class KivyApp(MDApp):
             self.sb = None
 
     def showNewsListThread(self):
-        self.uploaded_news_list = {}
-        self.root.ids.ResultPage.ids.NewsList.clear_widgets()
         Clock.schedule_once(self.showNewsList, 0)
         self.news_event = Clock.schedule_interval(self.showNewsList, 5)
 
@@ -100,12 +111,9 @@ class KivyApp(MDApp):
             result = self.news_queue.get_nowait()
             for k, v in result.items():
                 if k not in self.uploaded_news_list.keys():
-                    self.root.ids.ResultPage.ids.NewsList.add_widget(
-                        TwoLineAvatarIconListItem(
-                            text=k,
-                            secondary_text=v[0]
-                        )
-                    )
+                    m = MyListItem(text=k, secondary_text=v[0])
+                    m.setLink(v[1])
+                    self.root.ids.ResultPage.ids.NewsList.add_widget(m)
                     self.uploaded_news_list[k] = [v[0]]
 
     def getNewsListThread(self):
@@ -122,6 +130,7 @@ class KivyApp(MDApp):
             time.sleep(seconds)
 
     def clearThreads(self):
+        self.root.ids.ResultPage.ids.NewsList.clear_widgets()
         self.stop_event.set()
         self.news_event.cancel()
 
