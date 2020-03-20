@@ -82,6 +82,13 @@ BoxLayout:
                     on_release:
                         app.root.ids.WM.current = "search"
                         root.manager.transition.direction = "down"
+                        app.clearThreads()
+                MDFillRoundFlatButton:
+                    text: "Refresh"
+                    on_release:
+                        app.clearThreads()
+                        app.runResultPage()
+
             MDSeparator:
         ScrollView:
             MDList:
