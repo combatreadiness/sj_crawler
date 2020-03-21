@@ -1,5 +1,3 @@
-import asyncio
-import logging
 import threading
 import time
 
@@ -12,9 +10,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.metrics import dp
 
 from kivymd.app import MDApp
-from kivymd.uix.button import MDIconButton
 from kivymd.uix.chip import MDChip
-from kivymd.uix.list import TwoLineListItem, IRightBodyTouch
+from kivymd.uix.list import TwoLineListItem
 from kivymd.uix.snackbar import Snackbar
 
 from queue import Queue
@@ -30,7 +27,6 @@ class ResultPage(Screen):
 
 class WindowManager(ScreenManager):
     pass
-
 
 
 class MyListItem(TwoLineListItem):
